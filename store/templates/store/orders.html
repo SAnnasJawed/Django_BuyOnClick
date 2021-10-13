@@ -1,0 +1,48 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+{% load cart %}
+<div class="container">
+  <div class="border rounded p-4 m-4">
+    <p class="display-4 pl-4 ml-4">YOUR ORDERS</p>
+    <hr>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Sno.</th>
+          <th>Image</th>
+          <th>Product_Name</th>
+          <th>Date</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for order in orders %}
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td><img src="{{order.ordered_product_name.product_Image.url}}" class="rounded-circle" style="height: 80px;"></td>
+          <td>{{order.ordered_product_name.product_Name}}</td>
+          <th>{{order.date}}</th>
+          <td>{{order.price|currency}}</td>
+          <td>{{order.quantity}}</td>
+          <td>{{order.quantity|multiply:order.price|currency}}</td>
+          {% if order.completed %}
+          <td><span class="bg-success">Completed</span></td>
+          {% else %}
+          <td><span class="bg-warning">Pending...</span></td>
+          {% endif %}
+        </tr>
+
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Log In{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="p-4 m-4">
+        <div class="col-lg-4 mx-auto border rounded pt-4 px-4 pb-4 mt-4 mb-4">
+            <h2 class="alert alert-light border rounded text-center text-primary" style="font-family: Brush Script;">LogIn Here</h2>
+            <form action="/login" method="POST" onsubmit="return confirm('Login Successful..')">{% csrf_token %}
+                {% if success %}
+                <div class="alert alert-success" role="alert">
+                  {{success}}
+                </div>
+                {% endif %}
+
+                <!-- Email -->
+                <div class="form-group mt-2">
+                    <label >Email address</label>
+                    <input required type="email" name="email" value="{{email.email}}" class="form-control form-control-sm"  placeholder="example@gmail.com">
+                </div>
+
+                <!-- Password -->
+                <div class="form-group mt-2">
+                    <label >Password</label>
+                    <input type="password" name="password" class="form-control form-control-sm"  placeholder="******">
+                </div>
+
+                <!-- SignUp Button -->
+                <div class="form-group mt-2">
+                    <input type="submit" class="btn btn-sm btn-success col-lg-5" value="LogIn">
+                </div>
+
+                <span class="text-center justify-content-center">Don't Have an Account? <a href="/signup">SignUp</a></span>
+
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
